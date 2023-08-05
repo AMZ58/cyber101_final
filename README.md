@@ -1,6 +1,6 @@
 # cyber101_final
 
-#Whats up team
+#Hello team
 
 Welcome to the readme file. We can post our tasks we need to get done on the final here
 I just copyed the code over from the first page of the project. 

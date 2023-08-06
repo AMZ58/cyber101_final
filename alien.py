@@ -1,3 +1,7 @@
+"""
+This is still in progress as of 8/6/2023
+"""
+
 import pygame
 from pygame.sprite import Sprite
 

@@ -83,7 +83,12 @@ class AlienInvasion:
             self.bullets.empty()
 
             # Create a new fleet and center the ship
-            self._create_fleet()
+            aliens, rows = self._create_fleet()
+             # Create the full fleet of aliens.
+            for row_number in range(rows):
+                for alien_number in range(aliens):
+                    self._create_alien(alien_number, 1)
+
             self.ship.center_ship()
 
             # Hide the mouse cursor
@@ -138,12 +143,19 @@ class AlienInvasion:
 
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
+            # Increase level
             self.bullets.empty()
-            self._create_fleet()
+            self.stats.level += 1
+            alien_number , rows = self._create_fleet()
+
+            if self.stats.level > 1:
+                for row in range(1,rows):
+                    for alien in range(1,alien_number):                 
+                        self._create_alien(alien,row%self.stats.level)          
             self.settings.increase_speed()
 
-            # Increase level
-            self.stats.level += 1
+            
+            
             self.sb.prep_level()
 
     def _update_aliens(self):
@@ -203,9 +215,9 @@ class AlienInvasion:
         number_rows = available_space_y // (2 * alien_height)
         
         # Create the full fleet of aliens.
-        for row_number in range(number_rows):
-            for alien_number in range(number_aliens_x):
-                self._create_alien(alien_number, row_number)
+        
+
+        return number_aliens_x, number_rows
 
     def _create_alien(self, alien_number, row_number):
         """Create an alien and place it in the row."""
